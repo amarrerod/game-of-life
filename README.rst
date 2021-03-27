@@ -6,8 +6,8 @@ Game of Life
 .. image:: https://img.shields.io/pypi/v/game_of_life.svg
         :target: https://pypi.python.org/pypi/game_of_life
 
-.. image:: https://img.shields.io/travis/amarrerod/game_of_life.svg
-        :target: https://travis-ci.com/amarrerod/game_of_life
+.. image:: https://travis-ci.com/amarrerod/game-of-life.svg?branch=master
+        :target: https://travis-ci.com/amarrerod/game-of-life
 
 .. image:: https://readthedocs.org/projects/game-of-life/badge/?version=latest
         :target: https://game-of-life.readthedocs.io/en/latest/?badge=latest
