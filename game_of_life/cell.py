@@ -1,6 +1,9 @@
 
 
 class Cell:
+    """
+        class Cell to represent a Cell in the Game of Life game
+    """
 
     def __init__(self, alive: bool = False):
         """
