@@ -26,4 +26,4 @@ class Cell:
             When the Cell is alive it returns *
             otherwise it return o.
         """
-        return '*' if self.__is_alive is False else 'o'
+        return 'o' if self.__is_alive else '*'

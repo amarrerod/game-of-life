@@ -59,13 +59,14 @@ class Board:
         """
             Returns the string representation of the board
         """
+        frame = '#' * 80 + '\n'
         board_str = ''
         for row in self.__board:
             for cell in row:
                 board_str += str(cell)
             board_str += '\n'
 
-        return board_str
+        return frame + board_str + frame
 
     def __check_file_status(self, filename: str):
         """
@@ -75,7 +76,7 @@ class Board:
             raise TypeError('filename is not a string')
 
         if not os.path.exists(filename):
-            raise RuntimeError('filename not exists')
+            raise RuntimeError(f'filename {filename} not exists')
 
         return True
 
@@ -90,7 +91,7 @@ class Board:
                 self.__num_cols = int(lines[1])
                 for line in lines[2:]:
                     row = []
-                    tokens = line.split()
+                    tokens = list(line)[:-1]
                     for token in tokens:
                         cell = None
                         if token == '*':
@@ -130,20 +131,19 @@ class Board:
             Returns the status of the Cell in the (row, col) position
         """
         if self.__check_limits(row, col):
-            return self.__board[row][col].isAlive()
+            return self.__board[row][col].get_alive_status()
 
     def __get_neighbours_alive(self, row: int, col: int) -> int:
         """
-            Returns the number of alive neighbours for the 
+            Returns the number of alive neighbours for the
             Cell in the (row, col) position
         """
         neighbours_alive = 0
         for i in range(-1, 2):
             for j in range(-1, 2):
                 if i != j:  # Not the same position
-                    if self.is_alive((row + i) % self.__num_rows, (col + i) % self.__num_cols):
+                    if self.__is_alive((row + i) % self.__num_rows, (col + i) % self.__num_cols):
                         neighbours_alive += 1
-
         return neighbours_alive
 
     def __is_going_to_be_alive(self, row: int, col: int) -> bool:
@@ -154,8 +154,21 @@ class Board:
         if self.__check_limits(row, col):
             alive_neigh = self.__get_neighbours_alive(row, col)
             alive = False
-            if ((self.__is_alive(row, col) and (alive_neigh == 2 or alive_neigh == 3))
-                    or (not self.__is_alive(row, col) and alive_neigh == 3)):
+            if ((self.__is_alive(row, col) and ((alive_neigh == 2) or (alive_neigh == 3))
+                    or (not self.__is_alive(row, col) and alive_neigh == 3))):
                 alive = True
 
             return alive
+
+    def update_board(self):
+        """
+            Updates the board with a new iteration of the game
+        """
+        new_board = []
+        for idx in range(0, self.__num_rows):
+            new_row = []
+            for jdx in range(0, self.__num_cols):
+                new_row.append(Cell(self.__is_going_to_be_alive(idx, jdx)))
+            new_board.append(new_row)
+        self.__board.clear()
+        self.__board = new_board
