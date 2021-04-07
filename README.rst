@@ -9,6 +9,9 @@ Game of Life
 .. image:: https://travis-ci.com/amarrerod/game-of-life.svg?branch=master
         :target: https://travis-ci.com/amarrerod/game-of-life
 
+.. image:: https://coveralls.io/repos/github/amarrerod/game-of-life/badge.svg?branch=master
+        :target: https://coveralls.io/github/amarrerod/game-of-life?branch=master
+        
 .. image:: https://readthedocs.org/projects/game-of-life/badge/?version=latest
         :target: https://game-of-life.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
