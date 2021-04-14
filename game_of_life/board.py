@@ -59,12 +59,13 @@ class Board:
         """
             Returns the string representation of the board
         """
-        frame = '#' * 80 + '\n'
+        frame = '#' * (self.__num_cols + 2) + '\n'
         board_str = ''
         for row in self.__board:
+            board_str += '#'
             for cell in row:
                 board_str += str(cell)
-            board_str += '\n'
+            board_str += '#\n'
 
         return frame + board_str + frame
 
@@ -141,7 +142,7 @@ class Board:
         neighbours_alive = 0
         for i in range(-1, 2):
             for j in range(-1, 2):
-                if i != j:  # Not the same position
+                if i != 0 or j != 0:  # Not the same position
                     if self.__is_alive((row + i) % self.__num_rows, (col + i) % self.__num_cols):
                         neighbours_alive += 1
         return neighbours_alive
@@ -168,7 +169,9 @@ class Board:
         for idx in range(0, self.__num_rows):
             new_row = []
             for jdx in range(0, self.__num_cols):
-                new_row.append(Cell(self.__is_going_to_be_alive(idx, jdx)))
+                is_alive = self.__is_going_to_be_alive(idx, jdx)
+                new_row.append(Cell(is_alive))
             new_board.append(new_row)
+
         self.__board.clear()
         self.__board = new_board
