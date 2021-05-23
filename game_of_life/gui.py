@@ -38,7 +38,8 @@ class GUI(Frame):
         self.board_frame = Frame(self.__parent, width=self.__size_x + 2,
                                  height=self.__size_y + 2, borderwidth=1, relief=SUNKEN)
         self.board_frame.grid(row=2, column=0, columnspan=4)
-        self.cell_buttons = [[Button(self.board_frame, bg="white", width=2, height=1) for i in range(
+
+        self.cell_buttons = [[ButtonCell(self.board_frame, bg="white", width=2, height=1) for i in range(
             self.__size_x + 2)] for j in range(self.__size_y + 2)]
         # creates 2d array of buttons for grid
         for i in range(1, self.__size_y + 1):
